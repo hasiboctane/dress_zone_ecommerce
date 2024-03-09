@@ -13,6 +13,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/css/custom.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -68,27 +69,7 @@
         @include('admin.layouts.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Dashboard</h1>
-                        </div>
-                        <div class="col-sm-6">
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /.container-fluid -->
-            </section>
-            <!-- Main content -->
-            <section class="content">
-                <!-- Default box -->
-                @yield('main-content')
-                <!-- /.card -->
-            </section>
-            <!-- /.content -->
+            @yield('main-content')
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
@@ -106,6 +87,13 @@
     <script src="{{ asset('assets/admin_asset/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets/admin_asset/js/demo.js') }}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('custom-script')
 </body>
 

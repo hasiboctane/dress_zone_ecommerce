@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +31,20 @@ Route::prefix('admin')->group(function(){
         Route::get('/dashboard', [DashboardController::class,'index'])->name('admin.dashboard');
         Route::get('/logout',[DashboardController::class,'logout'])->name('admin.logout');
         // Category Routes
+        Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');
         Route::get('/category/create',[CategoryController::class,'create'])->name('category.create');
-        Route::post('/category/store',[CategoryController::class,'store'])->name('category.store');
+        Route::post('/category',[CategoryController::class,'store'])->name('category.store');
+        // Slug
+        Route::get('/getSlug', function (Request $request) {
+            $slug = '';
+            if(!empty($request->title)){
+                $slug = Str::slug($request->title);
+            }
+            return response()->json([
+                'status' => true,
+                'slug' => $slug
+            ]);
+        })->name('getSlug');
 
     });
 });
