@@ -4,9 +4,12 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\TempImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
-
+use Intervention\Image\ImageManager;
+use Intervention\Image\Laravel\Facades\Image;
 class CategoryController extends Controller
 {
     /**
@@ -52,6 +55,29 @@ class CategoryController extends Controller
             $category->slug = $request->slug;
             $category->status = $request->status;
             $category->save();
+            // save image
+            if(!empty($request->image_id)){
+                $tempImage = TempImage::find($request->image_id);
+                $extArray = explode('.', $tempImage->name);
+                $ext = last($extArray);
+                $imageName = $category->id.'.'.$ext;
+                $sPath = public_path().'/temp/'.$tempImage->name;
+                $dPath = public_path().'/uploads/category/'.$imageName;
+                File::copy($sPath,$dPath);
+                // Generate Thumbnail
+                $thumbPath = public_path().'/uploads/category/thumb/'.$imageName;
+                $manager = ImageManager::gd();
+                $image = $manager->read($sPath);
+                $image->resize(400,500);
+                $image->save($thumbPath);
+
+                // save to database
+                $category->image= $imageName;
+                $category->save();
+                // File::delete($sPath);
+
+
+            }
             session()->flash('success', 'Category created successfully');
             return response()->json([
                 'status' => true,

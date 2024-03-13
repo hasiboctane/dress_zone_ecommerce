@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="name">Name</label>
+                                    <label for="name">Category Name</label>
                                     <input type="text" name="name" id="name" class="form-control"
                                         placeholder="Name">
                                     <p></p>
@@ -47,6 +47,17 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input type="hidden" id="image_id" name="image_id" class="form-control">
+                                    <label for="image">Image</label>
+                                    <div id="image" class="dropzone dz-clickable">
+                                        <div class="dz-message needsclick ">
+                                            <br> Drop files here or click to upload <br> <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,7 +74,8 @@
 
 @section('custom-script')
     <script>
-        $(document).ready(function() {
+        Dropzone.autoDiscover = false;
+        $(function() {
             $('#categoryForm').submit(function(event) {
                 event.preventDefault();
                 var element = $(this);
@@ -117,7 +129,29 @@
                         $('#slug').val(response.slug);
                     }
                 })
-            })
+            });
+
+            const dropzone = $('#image').dropzone({
+                init: function() {
+                    this.on("addedfile", function(file) {
+                        if (this.files.length > 1) {
+                            this.removeFile(this.files[0]);
+                        }
+                    });
+                },
+                url: "{{ route('temp-image.create') }}",
+                maxFiles: 1,
+                paramName: "image",
+                acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                addRemoveLinks: true,
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(file, response) {
+                    $('#image_id').val(response.image_id);
+                }
+            });
+
         });
     </script>
 @endsection

@@ -10,6 +10,8 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/plugins/fontawesome-free/css/all.min.css') }}">
+    {{-- Dropzone --}}
+    <link rel="stylesheet" href="{{ asset('assets/admin_asset/plugins/dropzone/min/dropzone.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/css/custom.css') }}">
@@ -83,6 +85,8 @@
     <script src="{{ asset('assets/admin_asset/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('assets/admin_asset/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- Dropzone --}}
+    <script src="{{ asset('assets/admin_asset/plugins/dropzone/min/dropzone.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/admin_asset/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
