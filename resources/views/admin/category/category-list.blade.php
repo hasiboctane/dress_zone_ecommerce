@@ -57,13 +57,13 @@
                         </thead>
                         <tbody>
                             @if ($categories->count() > 0)
-                                @php
+                                {{-- @php
                                     $i = 1;
-                                @endphp
+                                @endphp --}}
                                 @foreach ($categories as $category)
                                     <tr>
-                                        {{-- <td>{{ $category->id }}</td> --}}
-                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $category->id }}</td>
+                                        {{-- <td>{{ $i++ }}</td> --}}
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td>
@@ -85,7 +85,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{ route('category.edit', $category->id) }}">
                                                 <svg class="filament-link-icon w-4 h-4 mr-1"
                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                     fill="currentColor" aria-hidden="true">
@@ -94,7 +94,8 @@
                                                     </path>
                                                 </svg>
                                             </a>
-                                            <a href="#" class="text-danger w-4 h-4 mr-1">
+                                            <a href="{{ route('category.delete', $category->id) }}"
+                                                class="text-danger w-4 h-4 mr-1">
                                                 <svg wire:loading.remove.delay="" wire:target=""
                                                     class="filament-link-icon w-4 h-4 mr-1"
                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
