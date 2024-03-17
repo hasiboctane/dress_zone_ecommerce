@@ -23,6 +23,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="card">
                 <form action="" method="GET">
                     <div class="card-header">
@@ -94,7 +99,7 @@
                                                     </path>
                                                 </svg>
                                             </a>
-                                            <a href="{{ route('category.delete', $category->id) }}"
+                                            <a href="#" onclick="deleteCategory({{ $category->id }})"
                                                 class="text-danger w-4 h-4 mr-1">
                                                 <svg wire:loading.remove.delay="" wire:target=""
                                                     class="filament-link-icon w-4 h-4 mr-1"
@@ -128,8 +133,26 @@
 
 @section('custom-script')
     <script>
-        $(document).ready(function() {
+        function deleteCategory(id) {
+            var url = "{{ route('category.destroy', 'id') }}";
+            var newUrl = url.replace('id', id);
+            if (confirm('Are you sure?')) {
+                $.ajax({
+                    url: newUrl,
+                    type: "delete",
+                    data: {},
+                    dataType: 'json',
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            window.location.href = "{{ route('categories.index') }}";
+                        }
+                    }
+                });
+            }
 
-        });
+        }
     </script>
 @endsection

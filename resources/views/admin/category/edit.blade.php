@@ -53,10 +53,9 @@
                                 <div class="mb-3">
                                     <label for="image">Previous Image</label>
                                     <div class="">
-                                        <img src="{{ asset('uploads/category/thumb/' . $category->image) }}" width="100px"
-                                            alt="{{ 'Image:' . $category->id . 'not found' }}">
+                                        <img src="{{ !empty($category->image && file_exists('uploads/category/thumb/' . $category->image)) ? asset('uploads/category/thumb/' . $category->image) : asset('assets/admin_asset/img/no_image.jpg') }}"
+                                            alt="{{ 'Image: ' . $category->id . ' not found' }}" width="100px">
                                     </div>
-
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -75,7 +74,7 @@
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{ route('categories.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>
@@ -94,8 +93,8 @@
                 var element = $(this);
                 $("button[type=submit]").prop('disabled', true);
                 $.ajax({
-                    url: "{{ route('category.store') }}",
-                    type: "POST",
+                    url: "{{ route('category.update', $category->id) }}",
+                    type: "PUT",
                     data: element.serializeArray(),
                     dataType: 'json',
                     success: function(response) {
@@ -110,6 +109,9 @@
                                 .siblings('p').removeClass('invalid-feedback')
                                 .html('');
                         } else {
+                            if (response.notFound) {
+                                window.location.href = "{{ route('categories.index') }}";
+                            }
                             if (errors.name) {
                                 $('#name').addClass('is-invalid')
                                     .siblings('p').addClass('invalid-feedback')
