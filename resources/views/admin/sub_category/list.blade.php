@@ -97,7 +97,8 @@
                                                     </path>
                                                 </svg>
                                             </a>
-                                            <a href="#" class="text-danger w-4 h-4 mr-1">
+                                            <a href="" onclick="deleteSubCategory({{ $subCategory->id }})"
+                                                class="text-danger w-4 h-4 mr-1">
                                                 <svg wire:loading.remove.delay="" wire:target=""
                                                     class="filament-link-icon w-4 h-4 mr-1"
                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -125,5 +126,26 @@
 @endsection
 
 @section('custom-script')
-    <script></script>
+    <script>
+        function deleteSubCategory(id) {
+            var url = "{{ route('sub-category.destroy', 'ID') }}";
+            var newUrl = url.replace('ID', id);
+            if (confirm('Are you sure?')) {
+                $.ajax({
+                    url: newUrl,
+                    type: "delete",
+                    data: {},
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            window.location.href = "{{ route('sub-categories.index') }}";
+                        }
+                    },
+
+                })
+            }
+        }
+    </script>
 @endsection
