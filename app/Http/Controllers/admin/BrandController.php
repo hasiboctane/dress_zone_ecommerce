@@ -64,7 +64,7 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        $brand = Brand::find($id);
+        $brand = Brand::findOrFail($id);
         if(empty($brand)){
             return redirect()->route('brands.index');
         }
@@ -76,7 +76,38 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $brand = Brand::find($id);
+        if(empty($brand)){
+            session()->flash('error', 'Brand not found');
+            return response()->json([
+                'status' => false,
+                'notFound' => true,
+                'message'=> 'Sub-Category not found',
+            ]);
+        }else{
+            $validator = Validator::make($request->all(),[
+                'name' => 'required',
+                'slug' => 'required|unique:brands,slug,'.$brand->id.',id',
+                'status' => 'required'
+            ]);
+            if($validator->passes()){
+                $brand->name = $request->name;
+                $brand->slug = $request->slug;
+                $brand->status = $request->status;
+                $brand->save();
+                session()->flash('success', 'Brand updated successfully');
+                return response()->json([
+                    'status'=>true,
+                    'message'=>'Brand updated successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'status'=>false,
+                    'message'=>$validator->errors()
+                ]);
+            }
+
+        }
     }
 
     /**
@@ -84,6 +115,17 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $brand = Brand::find($id);
+        if(empty($brand)){
+            session()->flash('error', 'Brand not found');
+            return response()->json([
+                'status' => false,
+                'notFound' => true,
+                'message'=> 'Brand not found',
+            ]);
+        }else{
+            $brand->delete();
+            session()->flash('success', 'Brand deleted successfully');
+        }
     }
 }

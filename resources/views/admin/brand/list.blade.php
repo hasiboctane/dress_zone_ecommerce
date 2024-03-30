@@ -95,7 +95,7 @@
                                                     </path>
                                                 </svg>
                                             </a>
-                                            <a href="" onclick="deleteSubCategory({{ $brand->id }})"
+                                            <a href="" onclick="deleteBrand({{ $brand->id }})"
                                                 class="text-danger w-4 h-4 mr-1">
                                                 <svg wire:loading.remove.delay="" wire:target=""
                                                     class="filament-link-icon w-4 h-4 mr-1"
@@ -129,20 +129,19 @@
 
 @section('custom-script')
     <script>
-        function deleteSubCategory(id) {
-            var url = "{{ route('sub-category.destroy', 'ID') }}";
+        function deleteBrand(id) {
+            var url = "{{ route('brand.destroy', 'ID') }}";
             var newUrl = url.replace('ID', id);
             if (confirm('Are you sure?')) {
                 $.ajax({
                     url: newUrl,
                     type: "delete",
-                    data: {},
                     headers: {
                         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
                         if (response.status) {
-                            window.location.href = "{{ route('sub-categories.index') }}";
+                            window.location.href = "{{ route('brands.index') }}";
                         }
                     },
 
