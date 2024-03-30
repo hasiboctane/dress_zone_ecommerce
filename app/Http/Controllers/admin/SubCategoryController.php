@@ -17,7 +17,8 @@ class SubCategoryController extends Controller
     {
         $subCategories = SubCategory::latest('id')->join('categories','sub_categories.category_id','=','categories.id')->select('sub_categories.*','categories.name as category_name');
         if(!empty(request()->get('keyword'))){
-            $subCategories = $subCategories->where('name','like','%'.request()->get('keyword').'%');
+            $subCategories = $subCategories->where('sub_categories.name','like','%'.request()->get('keyword').'%');
+            $subCategories = $subCategories->orWhere('categories.name','like','%'.request()->get('keyword').'%');
         }
         $subCategories = $subCategories->paginate(10);
         return view('admin.sub_category.list',compact('subCategories'));
@@ -39,7 +40,7 @@ class SubCategoryController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required',
-            'slug' => 'required || unique:sub_categories',
+            'slug' => 'required|unique:sub_categories',
             'category' => 'required'
         ]);
         if ($validator->passes() ) {

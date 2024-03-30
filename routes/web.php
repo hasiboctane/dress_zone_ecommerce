@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminLoginController;
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\SubCategoryController;
@@ -62,7 +63,13 @@ Route::prefix('admin')->group(function(){
         Route::get('/sub-category/{id}/edit',[SubCategoryController::class,'edit'])->name('sub-category.edit');
         Route::put('/sub-category/{id}',[SubCategoryController::class,'update'])->name('sub-category.update');
         Route::delete('/sub-category/{id}',[SubCategoryController::class,'destroy'])->name('sub-category.destroy');
-
+        // Brand Routes
+        Route::get('/brands',[BrandController::class,'index'])->name('brands.index');
+        Route::get('/brand/create',[BrandController::class,'create'])->name('brand.create');
+        Route::post('/brand',[BrandController::class,'store'])->name('brand.store');
+        Route::get('/brand/{id}/edit',[BrandController::class,'edit'])->name('brand.edit');
+        Route::put('/brand/{id}',[BrandController::class,'update'])->name('brand.update');
+        Route::delete('/brand/{id}',[BrandController::class,'destroy'])->name('brand.destroy');
 
 
     });
