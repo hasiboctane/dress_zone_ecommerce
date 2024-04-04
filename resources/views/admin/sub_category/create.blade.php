@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="name">Category Name</label>
+                                    <label for="name">Sub-Category Name</label>
                                     <input type="text" name="name" id="name" class="form-control"
                                         placeholder="Name">
                                     <p></p>

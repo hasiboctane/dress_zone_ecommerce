@@ -46,6 +46,7 @@
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +86,7 @@
                             $('#slug').removeClass('is-invalid')
                                 .siblings('p').removeClass('invalid-feedback')
                                 .html('');
-                            $('#category').removeClass('is-invalid')
+                            $('#status').removeClass('is-invalid')
                                 .siblings('p').removeClass('invalid-feedback')
                                 .html('');
                         } else {
@@ -98,6 +99,11 @@
                                 $('#slug').addClass('is-invalid')
                                     .siblings('p').addClass('invalid-feedback')
                                     .html(errors.slug);
+                            }
+                            if (errors.status) {
+                                $('#status').addClass('is-invalid')
+                                    .siblings('p').addClass('invalid-feedback')
+                                    .html(errors.status);
                             }
                         }
 

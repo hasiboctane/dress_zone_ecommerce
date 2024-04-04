@@ -4,21 +4,15 @@ use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\DropdownController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,7 +41,8 @@ Route::prefix('admin')->group(function(){
         })->name('getSlug');
         // Temp Image Controller
         Route::post('/upload-temp-image',[TempImageController::class,'create'])->name('temp-image.create');
-
+        // DropdownController
+        Route::get('/get-sub-categories',[DropdownController::class,'getSubCategories'])->name('get-sub-categories');
         // Category Routes
         Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');
         Route::get('/category/create',[CategoryController::class,'create'])->name('category.create');
@@ -70,6 +65,11 @@ Route::prefix('admin')->group(function(){
         Route::get('/brand/{id}/edit',[BrandController::class,'edit'])->name('brand.edit');
         Route::put('/brand/{id}',[BrandController::class,'update'])->name('brand.update');
         Route::delete('/brand/{id}',[BrandController::class,'destroy'])->name('brand.destroy');
+
+        // Product Routes
+        Route::get('/products',[ProductController::class,'index'])->name('products.index');
+        Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
+        Route::post('/product',[ProductController::class,'store'])->name('product.store');
 
 
     });

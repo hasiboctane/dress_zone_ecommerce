@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/plugins/dropzone/min/dropzone.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin_asset/plugins/summernote/summernote.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin_asset/css/custom.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -91,11 +92,17 @@
     <script src="{{ asset('assets/admin_asset/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets/admin_asset/js/demo.js') }}"></script>
+    <!-- Summernote -->
+    <script src="{{ asset('assets/admin_asset/plugins/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+        // Summernote
+        $('.summernote').summernote({
+            height: '200px'
         });
     </script>
     @yield('custom-script')
