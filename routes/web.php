@@ -8,17 +8,14 @@ use App\Http\Controllers\admin\DropdownController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImageController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-;
+Route::get('/',[FrontController::class,'index'])->name('front.home');
 Route::prefix('admin')->group(function(){
     Route::middleware(['admin.guest'])->group(function(){
         Route::get('/login', [AdminLoginController::class,'index'])->name('admin.login');
@@ -70,7 +67,9 @@ Route::prefix('admin')->group(function(){
         Route::get('/products',[ProductController::class,'index'])->name('products.index');
         Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
         Route::post('/product',[ProductController::class,'store'])->name('product.store');
-
+        Route::get('/product/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
+        Route::put('/product/{id}',[ProductController::class,'update'])->name('product.update');
+        Route::delete('/product/{id}',[ProductController::class,'destroy'])->name('product.destroy');
 
     });
 });

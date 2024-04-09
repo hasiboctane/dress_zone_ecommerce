@@ -18,9 +18,14 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.product.list');
+        $products = Product::latest('id')->with('product_images');
+        if(!empty($request->get('keyword'))){
+            $products = $products->where('title','like','%'.$request->get('keyword').'%');
+        }
+        $products = $products->paginate(10);
+        return view('admin.product.list',compact('products'));
     }
 
     /**
@@ -66,6 +71,7 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->compare_price = $request->compare_price;
             $product->sku = $request->sku;
+            $product->status = $request->status;
             $product->barcode = $request->barcode;
             $product->track_qty = $request->track_qty;
             $product->qty = $request->qty;
@@ -91,11 +97,11 @@ class ProductController extends Controller
                     $productImage->save();
                     // Generate Product Thumbnail(Large)
                     $sourcePath = public_path().'/temp/'.$tempImageInfo->name;
-                    $destPath = public_path().'/uploads/product/large/'.$tempImageInfo->name;
+                    $destPath = public_path().'/uploads/product/large/'.$imageName;
                     $image = ImageManager::gd()->read($sourcePath)->scale(width:1400);
                     $image->save($destPath);
                     // Generate Product Thumbnail(Small)
-                    $destPath = public_path().'/uploads/product/small/'.$tempImageInfo->name;
+                    $destPath = public_path().'/uploads/product/small/'.$imageName;
                     $image = ImageManager::gd()->read($sourcePath)->cover(300,300);
                     $image->save($destPath);
                 }
@@ -121,7 +127,14 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = Category::orderBy('name','asc')->get();
+        $subCategories = SubCategory::orderBy('name','asc')->get();
+        $brands= Brand::orderBy('name','asc')->get();
+        $product = Product::findOrFail($id);
+        if(empty($product)){
+            return redirect()->route('products.index')->with('error','Product not found');
+        }
+        return view('admin.product.edit',compact('product','categories','subCategories','brands'));
     }
 
     /**

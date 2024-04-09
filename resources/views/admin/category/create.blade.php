@@ -49,6 +49,15 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <label for="show_on_home">Show on Home</label>
+                                    <select name="show_on_home" id="show_on_home" class="form-control">
+                                        <option value="no" selected>No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
                                     <input type="hidden" id="image_id" name="image_id" class="form-control">
                                     <label for="image">Image</label>
                                     <div id="image" class="dropzone dz-clickable">
@@ -96,6 +105,9 @@
                             $('#slug').removeClass('is-invalid')
                                 .siblings('p').removeClass('invalid-feedback')
                                 .html('');
+                            $('#show_on_home').removeClass('is-invalid')
+                                .siblings('p').removeClass('invalid-feedback')
+                                .html('');
                         } else {
                             if (errors.name) {
                                 $('#name').addClass('is-invalid')
@@ -106,6 +118,11 @@
                                 $('#slug').addClass('is-invalid')
                                     .siblings('p').addClass('invalid-feedback')
                                     .html(errors.slug);
+                            }
+                            if (errors.show_on_home) {
+                                $('#show_on_home').addClass('is-invalid')
+                                    .siblings('p').addClass('invalid-feedback')
+                                    .html(errors.show_on_home);
                             }
                         }
 

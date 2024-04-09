@@ -69,6 +69,16 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="show_on_home">Show on Home</label>
+                                    <select name="show_on_home" id="show_on_home" class="form-control">
+                                        <option value="no" @if ($category->show_on_home == 'no') selected @endif>No</option>
+                                        <option value="yes" @if ($category->show_on_home == 'yes') selected @endif>Yes
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
