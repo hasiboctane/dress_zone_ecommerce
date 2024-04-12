@@ -51,6 +51,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <label for="show_on_home">Show on Home</label>
+                                    <select name="show_on_home" id="show_on_home" class="form-control">
+                                        <option value="yes" @if ($subCategory->show_on_home == 'yes') selected @endif>Yes
+                                        </option>
+                                        <option value="no" @if ($subCategory->show_on_home == 'no') selected @endif>No
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
                                     <label for="name">Category</label>
                                     <select name="category" id="category" class="form-control">
                                         {{-- <option value="">Select Category</option> --}}
@@ -70,7 +81,7 @@
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{ route('sub-categories.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>

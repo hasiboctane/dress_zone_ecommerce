@@ -50,6 +50,15 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <label for="show_on_home">Show on Home</label>
+                                    <select name="show_on_home" id="show_on_home" class="form-control">
+                                        <option value="yes" selected>Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
                                     <label for="name">Category</label>
                                     <select name="category" id="category" class="form-control">
                                         <option value="">Select Category</option>

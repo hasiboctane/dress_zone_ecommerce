@@ -105,9 +105,7 @@
                             $('#slug').removeClass('is-invalid')
                                 .siblings('p').removeClass('invalid-feedback')
                                 .html('');
-                            $('#show_on_home').removeClass('is-invalid')
-                                .siblings('p').removeClass('invalid-feedback')
-                                .html('');
+
                         } else {
                             if (errors.name) {
                                 $('#name').addClass('is-invalid')
@@ -119,11 +117,7 @@
                                     .siblings('p').addClass('invalid-feedback')
                                     .html(errors.slug);
                             }
-                            if (errors.show_on_home) {
-                                $('#show_on_home').addClass('is-invalid')
-                                    .siblings('p').addClass('invalid-feedback')
-                                    .html(errors.show_on_home);
-                            }
+
                         }
 
                     },
