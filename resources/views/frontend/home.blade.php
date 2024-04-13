@@ -120,22 +120,18 @@
         </div>
     </header>
 
-
-
     <main>
         <section class="section-1">
             <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel"
                 data-bs-interval="false">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <!-- <img src="carousel-1.jpg" class="d-block w-100" alt=""> -->
-
                         <picture>
                             <source media="(max-width: 799px)"
                                 srcset="{{ asset('assets/front_asset/images/carousel-1-m.jpg') }}" />
                             <source media="(min-width: 800px)"
-                                srcset="{{ asset('assets/front_asset/images/carousel-1-m.jpg') }}" />
-                            <img src="{{ asset('assets/front_asset/images/carousel-1-m.jpg') }}" alt="" />
+                                srcset="{{ asset('assets/front_asset/images/carousel-1.jpg') }}" />
+                            <img src="{{ asset('assets/front_asset/images/carousel-1.jpg') }}" alt="" />
                         </picture>
 
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -148,13 +144,12 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-
                         <picture>
                             <source media="(max-width: 799px)"
                                 srcset="{{ asset('assets/front_asset/images/carousel-2-m.jpg') }}" />
                             <source media="(min-width: 800px)"
-                                srcset="{{ asset('assets/front_asset/images/carousel-2-m.jpg') }}" />
-                            <img src="{{ asset('assets/front_asset/images/carousel-2-m.jpg') }}" alt="" />
+                                srcset="{{ asset('assets/front_asset/images/carousel-2.jpg') }}" />
+                            <img src="{{ asset('assets/front_asset/images/carousel-2.jpg') }}" alt="" />
                         </picture>
 
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -167,14 +162,12 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <!-- <img src="carousel-3.jpg" class="d-block w-100" alt=""> -->
-
                         <picture>
                             <source media="(max-width: 799px)"
                                 srcset="{{ asset('assets/front_asset/images/carousel-3-m.jpg') }}" />
                             <source media="(min-width: 800px)"
                                 srcset="{{ asset('assets/front_asset/images/carousel-3.jpg') }}" />
-                            <img src="{{ asset('assets/front_asset/images/carousel-2.jpg') }}" alt="" />
+                            <img src="{{ asset('assets/front_asset/images/carousel-3.jpg') }}" alt="" />
                         </picture>
 
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -236,118 +229,30 @@
                     <h2>Categories</h2>
                 </div>
                 <div class="row pb-3">
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
+                    @if (get_categories()->isNotEmpty())
+                        @foreach (get_categories() as $category)
+                            <div class="col-lg-3">
+                                <div class="cat-card">
+                                    <div class="left">
+                                        @if (!empty($category->image))
+                                            <img src="{{ asset('uploads/category/thumb/' . $category->image) }}"
+                                                alt="" class="img-fluid">
+                                        @else
+                                            <img src="{{ asset('assets/admin_asset/img/no_image.jpg') }}"
+                                                class="img-fluid">
+                                        @endif
+                                    </div>
+                                    <div class="right">
+                                        <div class="cat-data">
+                                            <h2>{{ $category->name }}</h2>
+                                            <p>{{ $category->products->count() }}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                <img src="{{ asset('assets/front_asset/images/cat-2.jpg') }}" alt=""
-                                    class="img-fluid">
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>Mens</h2>
-                                    <p>100 Products</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
+
                 </div>
             </div>
         </section>
@@ -358,190 +263,46 @@
                     <h2>Featured Products</h2>
                 </div>
                 <div class="row pb-3">
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                    @if ($featured_products->isNotEmpty())
+                        @foreach ($featured_products as $product)
+                            @php
+                                $productImage = $product->product_images->first();
+                            @endphp
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <div class="product-image position-relative">
+                                        <a href="" class="product-img">
+                                            @if (!empty($productImage->image))
+                                                <img src="{{ asset('uploads/product/small/' . $productImage->image) }}"
+                                                    class="card-img-top">
+                                            @else
+                                                <img src="{{ asset('assets/admin_asset/img/no_image.jpg') }}"
+                                                    class="card-img-top">
+                                            @endif
 
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                                        </a>
+                                        <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
+                                        <div class="product-action">
+                                            <a class="btn btn-dark" href="#">
+                                                <i class="fa fa-shopping-cart"></i> Add To Cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center mt-3">
+                                        <a class="h6 link" href="product.php">{{ $product->title }}</a>
+                                        <div class="price mt-2">
+                                            <span class="h5"><strong>{{ $product->price }}</strong></span>
+                                            @if ($product->compare_price > 0)
+                                                <span
+                                                    class="h6 text-underline"><del>{{ $product->compare_price }}</del></span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </section>
@@ -552,190 +313,46 @@
                     <h2>Latest Produsts</h2>
                 </div>
                 <div class="row pb-3">
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                    @if ($latest_products->isNotEmpty())
+                        @foreach ($latest_products as $product)
+                            @php
+                                $productImage = $product->product_images->first();
+                            @endphp
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <div class="product-image position-relative">
+                                        <a href="" class="product-img">
+                                            @if (!empty($productImage->image))
+                                                <img src="{{ asset('uploads/product/small/' . $productImage->image) }}"
+                                                    class="card-img-top">
+                                            @else
+                                                <img src="{{ asset('assets/admin_asset/img/no_image.jpg') }}"
+                                                    class="card-img-top">
+                                            @endif
 
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                                        </a>
+                                        <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
+                                        <div class="product-action">
+                                            <a class="btn btn-dark" href="#">
+                                                <i class="fa fa-shopping-cart"></i> Add To Cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center mt-3">
+                                        <a class="h6 link" href="product.php">{{ $product->title }}</a>
+                                        <div class="price mt-2">
+                                            <span class="h5"><strong>{{ $product->price }}</strong></span>
+                                            @if ($product->compare_price > 0)
+                                                <span
+                                                    class="h6 text-underline"><del>{{ $product->compare_price }}</del></span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card product-card">
-                            <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top"
-                                        src="{{ asset('assets/front_asset/images/product-1.jpg') }}"
-                                        alt=""></a>
-                                <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-
-                                <div class="product-action">
-                                    <a class="btn btn-dark" href="#">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center mt-3">
-                                <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                <div class="price mt-2">
-                                    <span class="h5"><strong>$100</strong></span>
-                                    <span class="h6 text-underline"><del>$120</del></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </section>

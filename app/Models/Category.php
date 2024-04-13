@@ -13,4 +13,8 @@ class Category extends Model
                     ->where('status',1)
                     ->where('show_on_home','yes');
     }
+    public function products(){
+        return $this->hasMany(Product::class)
+                    ->where('status',1);
+    }
 }
